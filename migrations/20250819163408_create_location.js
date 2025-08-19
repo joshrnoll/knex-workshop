@@ -7,7 +7,8 @@ exports.up = function (knex) {
     table.increments("id").primary();
     table.string("street_address").notNullable();
     table.string("country").notNullable();
-    table.string("state").notNullable(); // adds an auto incrementing PK column
+    table.string("state");
+    table.string("city").notNullable();
     table.string("postal_code").notNullable(); // equivalent of varchar(255)
   });
 };
