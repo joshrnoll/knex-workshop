@@ -14,7 +14,7 @@ exports.up = function (knex) {
     table.date("date_of_birth").notNullable();
     table.date("date_of_death");
     table.integer("hometown_id").notNullable().unsigned();
-    table.foreign("hometown_id").references("id").inTable("location").deferrable("deferred");
+    table.foreign("hometown_id").references("id").inTable("location");
     table.string("citizenship");
     table.enu("sex", ["male", "female"]).notNullable();
     //table.string("occupation").notNullable();
