@@ -3,7 +3,7 @@
  * @returns { Promise<void> }
  */
 exports.up = function (knex) {
-  return knex.schema.createTable("location", (table) => {
+  return knex.schema.createTable("people", (table) => {
     table.uuid("id").primary().defaultTo(knex.fn.uuid());
     table.string("first_name").notNullable();
     table.string("last_name").notNullable();
@@ -14,7 +14,7 @@ exports.up = function (knex) {
     table.date("date_of_birth").notNullable();
     table.date("date_of_death");
     table.integer("hometown_id").notNullable().unsigned();
-    table.foreign("hometown_id").references("id").inTable("location");
+    table.foreign("hometown_id").references("id").inTable("location").deferrable("deferred");
     table.string("citizenship");
     table.enu("sex", ["male", "female"]).notNullable();
     //table.string("occupation").notNullable();
@@ -26,9 +26,9 @@ exports.up = function (knex) {
  */
 exports.down = function (knex) {
   return knex.schema
-    .alterTable("location", (table) => {
+    .alterTable("people", (table) => {
       table.dropForeign("mother_id");
       table.dropForeign("father_id");
     })
-    .then(() => knex.schema.dropTableIfExists);
+    .then(() => knex.schema.dropTableIfExists('people'));
 };
