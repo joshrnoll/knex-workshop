@@ -13,7 +13,7 @@ exports.up = function (knex) {
     table.foreign("father_id").references("id").inTable("people");
     table.date("date_of_birth").notNullable();
     table.date("date_of_death");
-    table.integer("hometown_id").notNullable().unsigned();
+    table.integer("hometown_id").unsigned();
     table.foreign("hometown_id").references("id").inTable("location");
     table.string("citizenship");
     table.enu("sex", ["male", "female"]).notNullable();
@@ -30,5 +30,5 @@ exports.down = function (knex) {
       table.dropForeign("mother_id");
       table.dropForeign("father_id");
     })
-    .then(() => knex.schema.dropTableIfExists('people'));
+    .then(() => knex.schema.dropTableIfExists("people"));
 };
